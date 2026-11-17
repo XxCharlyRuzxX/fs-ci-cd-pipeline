@@ -1,0 +1,17 @@
+name: Health Check
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  health_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check application availability
+        run: |
+          curl --fail --silent --show-error \
+            --max-time 30 \
+            https://phonebook-backend-small-moonbeam-5457.fly.dev/

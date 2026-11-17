@@ -1,10 +1,11 @@
 require('dotenv').config()
+const path = require('path')
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 app.disable("x-powered-by");
-app.use(express.static('dist'))
+app.use(express.static(path.join(__dirname, '../dist')))
 app.use(express.json());
 app.use(cors());
 const mongoose = require('mongoose')

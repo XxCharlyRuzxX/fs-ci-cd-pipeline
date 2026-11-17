@@ -1,0 +1,19 @@
+{
+  "name": "phonebook-monorepo",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "npm run start --workspace=backend",
+    "dev": "npm run dev --workspace=backend",
+    "lint": "npm run lint --workspace=backend",
+    "eslint": "npm run lint --workspace=backend && npm run lint --workspace=frontend",
+    "build": "npm run build:ui",
+    "build:ui": "rm -rf dist && npm run build --workspace=frontend && cp -R frontend/dist dist",
+    "deploy": "fly deploy . --config backend/fly.toml --dockerfile backend/Dockerfile",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs --config backend/fly.toml"
+  }
+}
